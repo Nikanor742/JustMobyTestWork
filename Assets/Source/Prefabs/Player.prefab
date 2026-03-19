@@ -157,7 +157,6 @@ GameObject:
   - component: {fileID: 8244439602200688002}
   - component: {fileID: 6337424080773803486}
   - component: {fileID: 8565624903136343179}
-  - component: {fileID: 3566306873709257560}
   - component: {fileID: 5772095535936546538}
   m_Layer: 0
   m_Name: Player
@@ -258,25 +257,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3566306873709257560
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7876831732977113373}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7581abf5ef5f4c342b0e8f24c03aa833, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  walkSpeed: 5
-  runSpeed: 10
-  jumpHeight: 2
-  gravity: -9.81
-  mouseSensitivity: 450
-  bodyTransform: {fileID: 905253337485198995}
-  maxHeadAngle: 90
 --- !u!143 &5772095535936546538
 CharacterController:
   m_ObjectHideFlags: 0
