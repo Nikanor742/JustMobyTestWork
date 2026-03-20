@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Game.Data
+namespace Source.Data
 {
     [Serializable]
     public sealed class PlayerData

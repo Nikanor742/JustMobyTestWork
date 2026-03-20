@@ -11,7 +11,7 @@ using OdinSerializer.Editor;
 using System.IO;
 using System.Reflection;
 using System.Linq;
-using Game.Data;
+using Source.Data;
 
 public class OdinAOTBuilder : IPreprocessBuildWithReport, IPostprocessBuildWithReport
 {
