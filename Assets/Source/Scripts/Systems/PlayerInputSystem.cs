@@ -1,4 +1,6 @@
 ﻿using System;
+using R3;
+using Source.Scripts.Enums;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,7 +9,6 @@ namespace Source.Scripts.Systems
     public sealed class PlayerInputSystem : IDisposable
     {
         private readonly GameActions _gameActions = new();
-        
         public Vector2 MoveInput { get; private set; }
         public Vector2 LookInput { get; private set; }
         
@@ -15,6 +16,8 @@ namespace Source.Scripts.Systems
         public bool JumpInput { get; private set; }
         public bool ShootInput { get; private set; }
 
+        public readonly Subject<int> OnWeaponChangeInputEvent = new();
+        
         public void Initialize()
         {
             _gameActions.Player.Move.performed += MovePerformed;
@@ -31,6 +34,9 @@ namespace Source.Scripts.Systems
             
             _gameActions.Player.Shoot.performed += ShootPerformed;
             _gameActions.Player.Shoot.canceled += ShootCanceled;
+
+            _gameActions.Player.Weapon_1.performed += Weapon1Performed;
+            _gameActions.Player.Weapon_2.performed += Weapon2Performed;
             
             _gameActions.Enable();
         }
@@ -50,6 +56,9 @@ namespace Source.Scripts.Systems
         private void ShootPerformed(InputAction.CallbackContext obj) => ShootInput = true; 
         private void ShootCanceled(InputAction.CallbackContext obj) => ShootInput = false; 
         
+        private void Weapon1Performed(InputAction.CallbackContext obj) => OnWeaponChangeInputEvent?.OnNext(0);
+        private void Weapon2Performed(InputAction.CallbackContext obj) => OnWeaponChangeInputEvent?.OnNext(1);
+        
 
         public void Dispose()
         {
@@ -67,6 +76,9 @@ namespace Source.Scripts.Systems
             
             _gameActions.Player.Shoot.performed -= ShootPerformed;
             _gameActions.Player.Shoot.canceled -= ShootCanceled;
+            
+            _gameActions.Player.Weapon_1.performed -= Weapon1Performed;
+            _gameActions.Player.Weapon_2.performed -= Weapon2Performed;
             
             _gameActions?.Disable();
         }

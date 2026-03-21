@@ -2,6 +2,7 @@
 {
     public enum EWeaponType
     {
-        SimpleWeapon = 0
+        Pistol = 0,
+        MachineGun = 1
     }
 }

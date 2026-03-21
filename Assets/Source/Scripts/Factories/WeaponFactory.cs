@@ -7,13 +7,17 @@ using UnityEngine;
 
 namespace Source.Scripts.Factories
 {
-    public sealed class WeaponFactory
+    public sealed class WeaponFactory : IWeaponFactory
     {
-        private PlayerView _playerView;
+        private readonly PlayerView _playerView;
+        private readonly IBulletFactory _bulletFactory;
+        private readonly Camera _camera;
 
-        public WeaponFactory(PlayerView playerView)
+        public WeaponFactory(PlayerView playerView, IBulletFactory bulletFactory, Camera camera)
         {
             _playerView = playerView;
+            _bulletFactory = bulletFactory;
+            _camera = camera;
         }
 
         public IWeapon Create(WeaponConfigSO weaponConfig)
@@ -28,8 +32,8 @@ namespace Source.Scripts.Factories
             
             IWeapon weapon = weaponConfig.WeaponType switch
             {
-                EWeaponType.SimpleWeapon => new SimpleWeapon(weaponConfig, weaponView),
-                _ => new SimpleWeapon(weaponConfig, weaponView)
+                EWeaponType.Pistol => new SimpleWeapon(weaponConfig, weaponView, _bulletFactory, _camera),
+                _ => new SimpleWeapon(weaponConfig, weaponView,_bulletFactory, _camera)
             };
             
             

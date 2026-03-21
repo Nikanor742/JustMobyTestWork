@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d919cd3bba054c91b71edd97bf33bbc6, type: 3}
+  m_Name: MachineGun
+  m_EditorClassIdentifier: 
+  <WeaponType>k__BackingField: 1
+  <WeaponView>k__BackingField: {fileID: -668458452273944898, guid: be1a03308471e1c4f844c080129261b7, type: 3}
+  <BulletView>k__BackingField: {fileID: -3897506188762349317, guid: 8796df0e4ecad4c42a4bf64e7572f106, type: 3}
+  <HitMask>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  <Damage>k__BackingField: 10
+  <FireRate>k__BackingField: 0.1
+  <BulletSpeed>k__BackingField: 150
+  <LocalPosition>k__BackingField: {x: 0.00000037252903, y: 0.948, z: -0.16}
+  <LocalRotation>k__BackingField: {x: 270, y: 0, z: 0}
+  <LocalScale>k__BackingField: {x: 4, y: 4, z: 4}

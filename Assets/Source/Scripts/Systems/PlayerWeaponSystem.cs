@@ -1,7 +1,6 @@
 ﻿using System;
 using R3;
 using Source.Scripts.Enums;
-using Source.Scripts.Factories;
 using Source.Scripts.Interfaces;
 using Source.Scripts.Scriptable;
 
@@ -9,18 +8,18 @@ namespace Source.Scripts.Systems
 {
     public sealed class PlayerWeaponSystem : IDisposable
     {
-        private PlayerInputSystem _playerInputSystem;
-        private WeaponFactory _weaponFactory;
-        private WeaponConfigSO[] _weaponConfigs;
+        private readonly PlayerInputSystem _playerInputSystem;
+        private readonly IWeaponFactory _weaponFactory;
+        private readonly WeaponConfigSO[] _weaponConfigs;
 
         private IWeapon _currentWeapon;
         private IWeapon[] _weapons;
 
-        private CompositeDisposable _disposables = new();
+        private readonly CompositeDisposable _disposables = new();
 
         public PlayerWeaponSystem(
             PlayerInputSystem playerInputSystem,
-            WeaponFactory weaponFactory,
+            IWeaponFactory weaponFactory,
             WeaponConfigSO[] weaponConfigs)
         {
             _playerInputSystem = playerInputSystem;
@@ -30,6 +29,10 @@ namespace Source.Scripts.Systems
 
         public void Initialize()
         {
+            _playerInputSystem.OnWeaponChangeInputEvent
+                .Subscribe(SelectWeapon)
+                .AddTo(_disposables);
+            
             _weapons = new IWeapon[_weaponConfigs.Length];
 
             for (int i = 0; i < _weaponConfigs.Length; i++)
@@ -43,13 +46,13 @@ namespace Source.Scripts.Systems
                 .AddTo(_disposables);
         }
 
-        public void SelectWeapon(EWeaponType type)
+        public void SelectWeapon(int weaponIndex)
         {
             _currentWeapon?.Deselect();
 
             foreach (var weapon in _weapons)
             {
-                if (weapon.WeaponConfig.WeaponType == type)
+                if (weapon.WeaponConfig.WeaponType == (EWeaponType)weaponIndex)
                 {
                     _currentWeapon = weapon;
                     _currentWeapon.Select();

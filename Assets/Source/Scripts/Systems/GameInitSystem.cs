@@ -1,4 +1,5 @@
 using Source.Data;
+using Source.Scripts.Enemies;
 using Source.Scripts.Enums;
 using UnityEngine;
 using VContainer.Unity;
@@ -12,19 +13,23 @@ namespace Source.Scripts.Systems
         private readonly PlayerSpawnSystem _playerSpawnSystem;
         private readonly PlayerControlSystem _playerControlSystem;
         private readonly PlayerWeaponSystem _playerWeaponSystem;
+
+        private readonly EnemySpawnSystem _enemySpawnSystem;
         
         public GameInitSystem(
             PlayerInputSystem playerInputSystem, 
             LevelSpawnSystem levelSpawnSystem,
             PlayerSpawnSystem playerSpawnSystem,
             PlayerControlSystem playerControlSystem,
-            PlayerWeaponSystem playerWeaponSystem)
+            PlayerWeaponSystem playerWeaponSystem,
+            EnemySpawnSystem enemySpawnSystem)
         {
             _playerInputSystem = playerInputSystem;
             _levelSpawnSystem = levelSpawnSystem;
             _playerSpawnSystem = playerSpawnSystem;
             _playerControlSystem =  playerControlSystem;
             _playerWeaponSystem = playerWeaponSystem;
+            _enemySpawnSystem = enemySpawnSystem;
         }
 
         public void Initialize()
@@ -38,7 +43,9 @@ namespace Source.Scripts.Systems
             _playerControlSystem.Initialize();
             _playerWeaponSystem.Initialize();
             
-            _playerWeaponSystem.SelectWeapon(EWeaponType.SimpleWeapon);
+            _playerWeaponSystem.SelectWeapon(0);
+
+            _enemySpawnSystem.Initialize();
         }
     }
 }

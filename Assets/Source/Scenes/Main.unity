@@ -169,10 +169,13 @@ MonoBehaviour:
   autoInjectGameObjects: []
   _playerViewPrefab: {fileID: 8231463078569887524, guid: 4ca772988241e1847b6d74725a32f8fd, type: 3}
   _levelViewPrefab: {fileID: 4052540378396996874, guid: 5ed464637dc68254bbe22d2e3ad52bf6, type: 3}
+  _navMeshSurfacePrefab: {fileID: 3488093917517527679, guid: 6f1c7d3b894f3aa47b4c2eb56d4e1ba0, type: 3}
   _playerConfig: {fileID: 11400000, guid: 6669e5d8f64a70c479ed78ce616ef854, type: 2}
   _gameConfig: {fileID: 11400000, guid: bca06303a46d7444d8d3f4841ad5f78c, type: 2}
   _weaponConfigs:
   - {fileID: 11400000, guid: aa2ab0f6320fdbd46aabbaa6a6fb6c93, type: 2}
+  - {fileID: 11400000, guid: ccafbbdc17881d54e9473a5ae79a3b88, type: 2}
+  _enemyConfig: {fileID: 11400000, guid: ea49eaf293d70d448b3cb4e50246e97d, type: 2}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0

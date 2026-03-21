@@ -7,6 +7,7 @@ namespace Source.Scripts.Interfaces
     {
         WeaponConfigSO WeaponConfig { get; }
         WeaponView WeaponView { get; }
+        
         void Shoot();
 
         void Select();

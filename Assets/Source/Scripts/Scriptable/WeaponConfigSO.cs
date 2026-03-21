@@ -9,8 +9,11 @@ namespace Source.Scripts.Scriptable
     {
         [field: SerializeField] public EWeaponType WeaponType {get; private set;}
         [field: SerializeField] public WeaponView WeaponView {get; private set;}
+        [field: SerializeField] public BulletView BulletView {get; private set;}
+        [field: SerializeField] public LayerMask HitMask {get; private set;}
         [field: SerializeField] public float Damage {get; private set;}
         [field: SerializeField] public float FireRate {get; private set;}
+        [field: SerializeField] public float BulletSpeed {get; private set;}
         
         [field: SerializeField] public Vector3 LocalPosition {get; private set;}
         [field: SerializeField] public Vector3 LocalRotation {get; private set;}

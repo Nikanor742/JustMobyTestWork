@@ -1,4 +1,6 @@
-﻿using Source.Scripts.Interfaces;
+﻿using DG.Tweening;
+using Lean.Pool;
+using Source.Scripts.Interfaces;
 using Source.Scripts.Scriptable;
 using Source.Scripts.Views;
 using UnityEngine;
@@ -9,13 +11,22 @@ namespace Source.Scripts.Weapons
     {
         private readonly WeaponConfigSO _weaponConfig;
         private readonly WeaponView _weaponView;
+        private readonly IBulletFactory _bulletFactory;
 
         private float _nextShootTime;
         
-        public SimpleWeapon(WeaponConfigSO weaponConfig ,WeaponView weaponWeaponWeaponWeaponView)
+        private Camera _camera;
+        
+        public SimpleWeapon(
+            WeaponConfigSO weaponConfig, 
+            WeaponView weaponView, 
+            IBulletFactory bulletFactory, 
+            Camera camera)
         {
             _weaponConfig = weaponConfig;
-            _weaponView = weaponWeaponWeaponWeaponView;
+            _weaponView = weaponView;
+            _bulletFactory = bulletFactory;
+            _camera = camera;
         }
 
         public WeaponConfigSO WeaponConfig => _weaponConfig;
@@ -28,6 +39,32 @@ namespace Source.Scripts.Weapons
             
             _nextShootTime = Time.time + _weaponConfig.FireRate;
             _weaponView.ShootFX.Play();
+
+            var bullet = _bulletFactory.Create(_weaponConfig);
+            bullet.transform.position = _weaponView.BulletStartPoint.position;
+            bullet.transform.rotation = _weaponView.BulletStartPoint.rotation;
+            bullet.gameObject.SetActive(true);
+            
+            var screenCenter = new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0f);
+            var ray = _camera.ScreenPointToRay(screenCenter);
+            
+            Vector3 endPoint;
+            if (Physics.Raycast(ray, out var hit, 200, _weaponConfig.HitMask))
+            {
+                endPoint = hit.point;
+                if(hit.collider.TryGetComponent(out IDamageable damageable))
+                    damageable.TakeDamage(_weaponConfig.Damage);
+            }
+            else
+            {
+                endPoint = ray.origin + ray.direction * 200;
+            }
+            
+            var duration = Vector3.Distance(bullet.transform.position, endPoint) / _weaponConfig.BulletSpeed;
+            
+            bullet.transform.DOMove(endPoint, duration)
+                .SetEase(Ease.Linear)
+                .OnComplete(() => LeanPool.Despawn(bullet));
         }
 
         public void Select()
