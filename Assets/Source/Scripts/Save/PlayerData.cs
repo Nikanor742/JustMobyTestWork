@@ -15,6 +15,7 @@ namespace Source.Scripts.Save
         public PlayerData()
         {
             InitProperties();
+            Language.Value = 1;
         }
 
         public void InitProperties()
