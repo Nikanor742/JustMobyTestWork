@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Source.Scripts.Player
+namespace Source.Scripts.Player.Views
 {
     public sealed class PlayerHealthView : MonoBehaviour
     {

@@ -1,10 +1,12 @@
 using DG.Tweening;
 using Lean.Pool;
-using Source.Data;
-using Source.Scripts.Enums;
-using Source.Scripts.Interfaces;
-using Source.Scripts.Scriptable;
-using Source.Scripts.Views;
+using Source.Scripts.Configs;
+using Source.Scripts.Enemies;
+using Source.Scripts.Save;
+using Source.Scripts.Upgrades;
+using Source.Scripts.Upgrades.Enums;
+using Source.Scripts.Weapons.Factories;
+using Source.Scripts.Weapons.Views;
 using UnityEngine;
 
 namespace Source.Scripts.Weapons

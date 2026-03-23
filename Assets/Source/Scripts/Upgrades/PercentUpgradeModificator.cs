@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using Source.Scripts.Enums;
-using Source.Scripts.Interfaces;
-using Source.Scripts.Scriptable;
+using Source.Scripts.Configs;
+using Source.Scripts.Upgrades.Enums;
 
 namespace Source.Scripts.Upgrades
 {
