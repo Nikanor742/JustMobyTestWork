@@ -14,7 +14,7 @@
 
 ## Технологии
 
-- `Unity 6`
+- `Unity 2022.3.62f3`
 - `URP`
 - `VContainer`
 - `R3`
