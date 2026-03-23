@@ -204,6 +204,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "UI",
+            "id": "a13cc7f6-2a83-4121-a83a-3634c7815b8a",
+            "actions": [
+                {
+                    "name": "ShowUpgrades",
+                    "type": "Button",
+                    "id": "2251614b-1209-4e1e-9e7e-aac19f112536",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "2afe7797-e6ae-45ab-ab1d-737a55cf2c7d",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ShowUpgrades",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

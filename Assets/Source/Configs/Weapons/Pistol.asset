@@ -20,7 +20,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   <Damage>k__BackingField: 10
   <FireRate>k__BackingField: 0.5
-  <BulletSpeed>k__BackingField: 150
+  <BulletSpeed>k__BackingField: 200
   <LocalPosition>k__BackingField: {x: 0.00000037252903, y: 0.948, z: -0.16}
   <LocalRotation>k__BackingField: {x: 270, y: 0, z: 0}
   <LocalScale>k__BackingField: {x: 4, y: 4, z: 4}

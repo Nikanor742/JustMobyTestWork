@@ -11,12 +11,18 @@ namespace Source.Scripts.Factories
     {
         private readonly PlayerView _playerView;
         private readonly IBulletFactory _bulletFactory;
+        private readonly IUpgradeModificator _upgradeModificator;
         private readonly Camera _camera;
 
-        public WeaponFactory(PlayerView playerView, IBulletFactory bulletFactory, Camera camera)
+        public WeaponFactory(
+            PlayerView playerView, 
+            IBulletFactory bulletFactory,
+            IUpgradeModificator upgradeModificator, 
+            Camera camera)
         {
             _playerView = playerView;
             _bulletFactory = bulletFactory;
+            _upgradeModificator = upgradeModificator;
             _camera = camera;
         }
 
@@ -32,8 +38,9 @@ namespace Source.Scripts.Factories
             
             IWeapon weapon = weaponConfig.WeaponType switch
             {
-                EWeaponType.Pistol => new SimpleWeapon(weaponConfig, weaponView, _bulletFactory, _camera),
-                _ => new SimpleWeapon(weaponConfig, weaponView,_bulletFactory, _camera)
+                EWeaponType.Pistol => 
+                    new SimpleWeapon(weaponConfig, weaponView, _bulletFactory,_upgradeModificator, _camera),
+                _ => new SimpleWeapon(weaponConfig, weaponView,_bulletFactory, _upgradeModificator, _camera)
             };
             
             

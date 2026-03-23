@@ -1,5 +1,6 @@
 ﻿using System;
 using OdinSerializer;
+using Source.Scripts.Data;
 using UnityEngine;
 
 namespace Source.Data
@@ -23,6 +24,7 @@ namespace Source.Data
                 {
                     byte[] bytes = Convert.FromBase64String(PlayerPrefs.GetString(_playerDataKey));
                     player = SerializationUtility.DeserializeValue<PlayerData>(bytes, DataFormat.Binary);
+                    player.InitFields();
                 }
                 else
                 {

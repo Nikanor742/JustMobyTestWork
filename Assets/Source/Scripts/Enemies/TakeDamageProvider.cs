@@ -6,11 +6,11 @@ namespace Source.Scripts.Enemies
 {
     public class TakeDamageProvider : MonoBehaviour, IDamageable
     {
-        public Subject<float> OnTakeDamageEvent { get; } = new();
+        public Subject<TakeDamageData> OnTakeDamageEvent { get; } = new();
 
-        public void TakeDamage(float damage)
+        public void TakeDamage(float damage, Vector3 hitPoint)
         {
-            OnTakeDamageEvent?.OnNext(damage);
+            OnTakeDamageEvent?.OnNext(new TakeDamageData() { Damage = damage, HitPoint = hitPoint });
         }
     }
 }

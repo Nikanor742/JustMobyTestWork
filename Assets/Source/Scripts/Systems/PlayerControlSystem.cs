@@ -1,5 +1,8 @@
 using System;
 using R3;
+using Source.Data;
+using Source.Scripts.Enums;
+using Source.Scripts.Interfaces;
 using Source.Scripts.Models;
 using Source.Scripts.Views;
 using Source.Scripts.Scriptable;
@@ -15,6 +18,8 @@ namespace Source.Scripts.Systems
         private readonly PlayerConfigSO _playerConfig;
         private readonly GameConfigSO _gameConfig;
         private readonly PlayerInputSystem _playerInputSystem;
+        private readonly GameStateModel _gameStateModel;
+        private readonly IUpgradeModificator _upgradeModificator;
         
         private readonly CompositeDisposable _disposables = new();
         
@@ -22,13 +27,17 @@ namespace Source.Scripts.Systems
             PlayerModel playerModel,
             PlayerConfigSO playerConfig,
             GameConfigSO  gameConfig,
-            PlayerInputSystem playerInputSystem)
+            PlayerInputSystem playerInputSystem,
+            GameStateModel gameStateModel,
+            IUpgradeModificator upgradeModificator)
         {
             _playerView = playerView;
             _playerModel = playerModel;
             _playerConfig = playerConfig;
             _gameConfig = gameConfig;
             _playerInputSystem = playerInputSystem;
+            _gameStateModel = gameStateModel;
+            _upgradeModificator = upgradeModificator;
         }
 
         public void Initialize()
@@ -40,9 +49,12 @@ namespace Source.Scripts.Systems
             Observable.EveryUpdate()
                 .Subscribe(_ =>
                 {
-                    Jump();
-                    Look();
-                    Move();
+                    if (!_gameStateModel.UpgradesIsOpen.Value)
+                    {
+                        Jump();
+                        Look();
+                        Move();
+                    }
                 })
                 .AddTo(_disposables);
         }
@@ -75,8 +87,17 @@ namespace Source.Scripts.Systems
             var moveZ = _playerInputSystem.MoveInput.y;
 
             var move = _playerView.transform.right * moveX + _playerView.transform.forward * moveZ;
+            
+            var runSpeed = _upgradeModificator.GetValue(EUpgradeType.Speed,
+                _playerConfig.RunSpeed,
+                SaveExtension.player.UpgradeStats[EUpgradeType.Speed].Level);
+            
+            var walkSpeed = _upgradeModificator.GetValue(EUpgradeType.Speed,
+                _playerConfig.WalkSpeed,
+                SaveExtension.player.UpgradeStats[EUpgradeType.Speed].Level);
+            
             var speed = _playerInputSystem.SprintInput && _playerView.CharacterController.isGrounded ? 
-                _playerConfig.RunSpeed : _playerConfig.WalkSpeed;
+                runSpeed : walkSpeed;
 
             _playerModel.Velocity.y += _playerConfig.Gravity * Time.deltaTime;
             

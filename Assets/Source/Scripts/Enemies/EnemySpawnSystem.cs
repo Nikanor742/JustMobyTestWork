@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Source.Scripts.Views;
+using Random = UnityEngine.Random;
 
 namespace Source.Scripts.Enemies
 {
@@ -38,8 +39,21 @@ namespace Source.Scripts.Enemies
             {
                 if (_enemies.Count < _enemyConfig.MaxEnemyCount)
                 {
-                    var enemy = _enemyFactory.Create(_enemyConfig, _levelView.EnemySpawnPoint);
-                    _enemies.Add(new EnemyController(enemy,_enemyConfig));
+                    var enemyView = _enemyFactory.Create(_enemyConfig, 
+                        _levelView.EnemySpawnPoints[Random.Range(0, _levelView.EnemySpawnPoints.Length)]);
+                    var enemyController = new EnemyController(_enemyConfig);
+                    enemyController.Initialize(enemyView).Forget();
+                    
+                    _enemies.Add(enemyController);
+                }
+                else
+                {
+                    foreach (var e in _enemies)
+                    {
+                        if(e.EnemyIsDead)
+                            e.Respawn(_enemyFactory.Create(_enemyConfig, 
+                                _levelView.EnemySpawnPoints[Random.Range(0, _levelView.EnemySpawnPoints.Length)]));
+                    }
                 }
 
                 await UniTask.WaitForSeconds(_enemyConfig.SpawnDelay,

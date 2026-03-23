@@ -12,6 +12,7 @@ using System.IO;
 using System.Reflection;
 using System.Linq;
 using Source.Data;
+using Source.Scripts.Data;
 
 public class OdinAOTBuilder : IPreprocessBuildWithReport, IPostprocessBuildWithReport
 {

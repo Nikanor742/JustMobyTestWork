@@ -6,6 +6,7 @@ namespace Source.Scripts.Enemies
     public sealed class EnemyModel
     {
         public float WaitTimeLeft;
+        public float DeathTime;
 
         public float MaxHp;
         public ReactiveProperty<float> CurrentHp { get; } = new();

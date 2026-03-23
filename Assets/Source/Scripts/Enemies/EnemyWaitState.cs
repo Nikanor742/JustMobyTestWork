@@ -4,19 +4,19 @@ namespace Source.Scripts.Enemies
 {
     public sealed class EnemyWaitState : IEnemyState
     {
-        private readonly EnemyView _enemyView;
+        private EnemyView _enemyView;
         private readonly EnemyModel _enemyModel;
         private readonly EnemyConfigSO _enemyConfig;
         
         public EnemyWaitState(
-            EnemyView enemyView, 
             EnemyModel enemyModel, 
             EnemyConfigSO enemyConfig)
         {
-            _enemyView = enemyView;
             _enemyModel = enemyModel;
             _enemyConfig = enemyConfig;
         }
+
+        public void SetView(EnemyView enemyView) => _enemyView = enemyView;
         
         public void Enter()
         {

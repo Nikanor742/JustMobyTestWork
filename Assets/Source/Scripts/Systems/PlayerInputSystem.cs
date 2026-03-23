@@ -8,7 +8,7 @@ namespace Source.Scripts.Systems
 {
     public sealed class PlayerInputSystem : IDisposable
     {
-        private readonly GameActions _gameActions = new();
+        private GameActions _gameActions;
         public Vector2 MoveInput { get; private set; }
         public Vector2 LookInput { get; private set; }
         
@@ -18,8 +18,10 @@ namespace Source.Scripts.Systems
 
         public readonly Subject<int> OnWeaponChangeInputEvent = new();
         
-        public void Initialize()
+        public void Initialize(GameActions gameActions)
         {
+            _gameActions = gameActions;
+            
             _gameActions.Player.Move.performed += MovePerformed;
             _gameActions.Player.Move.canceled += MoveCanceled;
             
@@ -37,8 +39,6 @@ namespace Source.Scripts.Systems
 
             _gameActions.Player.Weapon_1.performed += Weapon1Performed;
             _gameActions.Player.Weapon_2.performed += Weapon2Performed;
-            
-            _gameActions.Enable();
         }
 
         private void MovePerformed(InputAction.CallbackContext obj) => MoveInput = obj.ReadValue<Vector2>();
@@ -79,8 +79,6 @@ namespace Source.Scripts.Systems
             
             _gameActions.Player.Weapon_1.performed -= Weapon1Performed;
             _gameActions.Player.Weapon_2.performed -= Weapon2Performed;
-            
-            _gameActions?.Disable();
         }
     }
 }

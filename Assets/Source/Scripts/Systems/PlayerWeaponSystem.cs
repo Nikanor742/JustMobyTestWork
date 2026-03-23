@@ -2,6 +2,7 @@
 using R3;
 using Source.Scripts.Enums;
 using Source.Scripts.Interfaces;
+using Source.Scripts.Models;
 using Source.Scripts.Scriptable;
 
 namespace Source.Scripts.Systems
@@ -11,6 +12,7 @@ namespace Source.Scripts.Systems
         private readonly PlayerInputSystem _playerInputSystem;
         private readonly IWeaponFactory _weaponFactory;
         private readonly WeaponConfigSO[] _weaponConfigs;
+        private readonly GameStateModel _gameStateModel;
 
         private IWeapon _currentWeapon;
         private IWeapon[] _weapons;
@@ -20,11 +22,13 @@ namespace Source.Scripts.Systems
         public PlayerWeaponSystem(
             PlayerInputSystem playerInputSystem,
             IWeaponFactory weaponFactory,
-            WeaponConfigSO[] weaponConfigs)
+            WeaponConfigSO[] weaponConfigs,
+            GameStateModel gameStateModel)
         {
             _playerInputSystem = playerInputSystem;
             _weaponFactory = weaponFactory;
             _weaponConfigs = weaponConfigs;
+            _gameStateModel = gameStateModel;
         }
 
         public void Initialize()
@@ -42,12 +46,19 @@ namespace Source.Scripts.Systems
 
             Observable.EveryUpdate()
                 .Where(_ => _playerInputSystem.ShootInput)
-                .Subscribe(_ => _currentWeapon?.Shoot())
+                .Subscribe(_ =>
+                {
+                    if(!_gameStateModel.UpgradesIsOpen.Value)
+                        _currentWeapon?.Shoot();
+                })
                 .AddTo(_disposables);
         }
 
         public void SelectWeapon(int weaponIndex)
         {
+            if(_gameStateModel.UpgradesIsOpen.Value)
+                return;
+            
             _currentWeapon?.Deselect();
 
             foreach (var weapon in _weapons)
