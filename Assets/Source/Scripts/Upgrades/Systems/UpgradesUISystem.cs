@@ -75,6 +75,10 @@ namespace Source.Scripts.Upgrades.Systems
                 .Subscribe(_ => ChangeWindowState())
                 .AddTo(_disposables);
             
+            _upgradesWindowView.OnExitButtonClicked
+                .Subscribe(_ => ChangeWindowState())
+                .AddTo(_disposables);
+            
             SaveExtension.player.Language.OnChangeEvent
                 .Subscribe(_ =>
                 {
@@ -100,9 +104,16 @@ namespace Source.Scripts.Upgrades.Systems
             foreach (var skill in _upgradeSessionModel.Skills)
             {
                 if (skill.Value.CurrentLevel.Value == skill.Value.MaxLevel.Value)
+                {
                     _upgradesWindowView.Upgrades[skill.Key].SetUpgradeLevel("max");
+                    _upgradesWindowView.Upgrades[skill.Key].SetUpgradeButtonVisible(false);
+                }
                 else
-                    _upgradesWindowView.Upgrades[skill.Key].SetUpgradeLevel($"lvl {skill.Value.CurrentLevel.Value}");
+                {
+                    _upgradesWindowView.Upgrades[skill.Key]
+                        .SetUpgradeLevel($"lvl {skill.Value.CurrentLevel.Value}");
+                    _upgradesWindowView.Upgrades[skill.Key].SetUpgradeButtonVisible(true);
+                }
             }
         }
 

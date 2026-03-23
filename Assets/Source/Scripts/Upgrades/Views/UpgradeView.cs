@@ -18,6 +18,8 @@ namespace Source.Scripts.Upgrades.Views
 
         public void SetUpgradeName(string upgradeName) => _localizationText.SetText(upgradeName);
         public void SetUpgradeLevel(string levelText) => _upgradeLevel.text = levelText;
+        
+        public void SetUpgradeButtonVisible(bool visible) => _upgradeButton.gameObject.SetActive(visible);
 
         private void Awake()
         {
