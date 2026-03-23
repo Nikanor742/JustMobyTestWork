@@ -1,5 +1,4 @@
-﻿using Source.Scripts.Player;
-using Source.Scripts.Player.Views;
+﻿using Source.Scripts.Player.Views;
 using Source.Scripts.Upgrades.Views;
 using UnityEngine;
 
