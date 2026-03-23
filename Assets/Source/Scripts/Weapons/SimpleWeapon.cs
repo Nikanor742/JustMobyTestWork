@@ -61,7 +61,7 @@ namespace Source.Scripts.Weapons
                 if (hit.collider.TryGetComponent(out IDamageable damageable))
                 {
                     var damage = _upgradeModificator.GetValue(EUpgradeType.Damage, _weaponConfig.Damage,
-                        SaveExtension.player.UpgradeStats[EUpgradeType.Damage].Level);
+                        SaveExtension.player.UpgradeStats[EUpgradeType.Damage].Value);
                     
                     damageable.TakeDamage(damage, hit.point);
                 }

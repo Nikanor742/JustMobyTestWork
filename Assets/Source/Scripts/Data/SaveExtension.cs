@@ -24,7 +24,7 @@ namespace Source.Data
                 {
                     byte[] bytes = Convert.FromBase64String(PlayerPrefs.GetString(_playerDataKey));
                     player = SerializationUtility.DeserializeValue<PlayerData>(bytes, DataFormat.Binary);
-                    player.InitFields();
+                    player.InitProperties();
                 }
                 else
                 {

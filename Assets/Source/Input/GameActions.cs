@@ -154,6 +154,15 @@ public partial class @GameActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Weapon_3"",
+                    ""type"": ""Button"",
+                    ""id"": ""92673959-e271-4911-b0eb-de748e1e898f"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -288,6 +297,17 @@ public partial class @GameActions: IInputActionCollection2, IDisposable
                     ""action"": ""Weapon_2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3318e737-d853-444b-b23e-ab78bd18ddb5"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Weapon_3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -331,6 +351,7 @@ public partial class @GameActions: IInputActionCollection2, IDisposable
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
         m_Player_Weapon_1 = m_Player.FindAction("Weapon_1", throwIfNotFound: true);
         m_Player_Weapon_2 = m_Player.FindAction("Weapon_2", throwIfNotFound: true);
+        m_Player_Weapon_3 = m_Player.FindAction("Weapon_3", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_ShowUpgrades = m_UI.FindAction("ShowUpgrades", throwIfNotFound: true);
@@ -422,6 +443,7 @@ public partial class @GameActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Shoot;
     private readonly InputAction m_Player_Weapon_1;
     private readonly InputAction m_Player_Weapon_2;
+    private readonly InputAction m_Player_Weapon_3;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -461,6 +483,10 @@ public partial class @GameActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/Weapon_2".
         /// </summary>
         public InputAction @Weapon_2 => m_Wrapper.m_Player_Weapon_2;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Weapon_3".
+        /// </summary>
+        public InputAction @Weapon_3 => m_Wrapper.m_Player_Weapon_3;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -508,6 +534,9 @@ public partial class @GameActions: IInputActionCollection2, IDisposable
             @Weapon_2.started += instance.OnWeapon_2;
             @Weapon_2.performed += instance.OnWeapon_2;
             @Weapon_2.canceled += instance.OnWeapon_2;
+            @Weapon_3.started += instance.OnWeapon_3;
+            @Weapon_3.performed += instance.OnWeapon_3;
+            @Weapon_3.canceled += instance.OnWeapon_3;
         }
 
         /// <summary>
@@ -540,6 +569,9 @@ public partial class @GameActions: IInputActionCollection2, IDisposable
             @Weapon_2.started -= instance.OnWeapon_2;
             @Weapon_2.performed -= instance.OnWeapon_2;
             @Weapon_2.canceled -= instance.OnWeapon_2;
+            @Weapon_3.started -= instance.OnWeapon_3;
+            @Weapon_3.performed -= instance.OnWeapon_3;
+            @Weapon_3.canceled -= instance.OnWeapon_3;
         }
 
         /// <summary>
@@ -725,6 +757,13 @@ public partial class @GameActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnWeapon_2(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Weapon_3" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnWeapon_3(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

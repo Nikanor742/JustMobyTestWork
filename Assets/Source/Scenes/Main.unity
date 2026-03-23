@@ -176,6 +176,7 @@ MonoBehaviour:
   _weaponConfigs:
   - {fileID: 11400000, guid: aa2ab0f6320fdbd46aabbaa6a6fb6c93, type: 2}
   - {fileID: 11400000, guid: ccafbbdc17881d54e9473a5ae79a3b88, type: 2}
+  - {fileID: 11400000, guid: 16688d51d234ac346899c11d07c34ded, type: 2}
   _enemyConfig: {fileID: 11400000, guid: ea49eaf293d70d448b3cb4e50246e97d, type: 2}
   _upgradeConfigs:
   - {fileID: 11400000, guid: aff38548257ec754db695b3f084c2fe1, type: 2}

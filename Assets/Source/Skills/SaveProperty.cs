@@ -9,6 +9,11 @@ namespace Source.Skills
     {
         [NonSerialized] public ReactiveProperty<T> OnChangeEvent = new();
         [SerializeField] private T _savedValue;
+
+        public SaveProperty()
+        {
+            Init();
+        }
         
         public void Init()
         {

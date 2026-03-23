@@ -39,6 +39,7 @@ namespace Source.Scripts.Systems
 
             _gameActions.Player.Weapon_1.performed += Weapon1Performed;
             _gameActions.Player.Weapon_2.performed += Weapon2Performed;
+            _gameActions.Player.Weapon_3.performed += Weapon3Performed;
         }
 
         private void MovePerformed(InputAction.CallbackContext obj) => MoveInput = obj.ReadValue<Vector2>();
@@ -58,6 +59,7 @@ namespace Source.Scripts.Systems
         
         private void Weapon1Performed(InputAction.CallbackContext obj) => OnWeaponChangeInputEvent?.OnNext(0);
         private void Weapon2Performed(InputAction.CallbackContext obj) => OnWeaponChangeInputEvent?.OnNext(1);
+        private void Weapon3Performed(InputAction.CallbackContext obj) => OnWeaponChangeInputEvent?.OnNext(2);
         
 
         public void Dispose()
@@ -79,6 +81,7 @@ namespace Source.Scripts.Systems
             
             _gameActions.Player.Weapon_1.performed -= Weapon1Performed;
             _gameActions.Player.Weapon_2.performed -= Weapon2Performed;
+            _gameActions.Player.Weapon_3.performed -= Weapon3Performed;
         }
     }
 }

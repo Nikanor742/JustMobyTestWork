@@ -77,7 +77,7 @@ namespace Source.Scripts.Systems
             {
                 foreach (var config in _upgradeConfigs)
                 {
-                    SaveExtension.player.UpgradeStats.Add(config.Key, new PlayerStatsData(0));
+                    SaveExtension.player.UpgradeStats.Add(config.Key, new SaveProperty<int>());
                 }
             }
         }
@@ -92,7 +92,7 @@ namespace Source.Scripts.Systems
                 foreach (var s in _upgradeSessionModel.Skills)
                 {
                     s.Value.MaxLevel.Value = _upgradeConfigs[s.Key].UpgradePercents.Length;
-                    s.Value.CurrentLevel.Value = SaveExtension.player.UpgradeStats[s.Key].Level;
+                    s.Value.CurrentLevel.Value = SaveExtension.player.UpgradeStats[s.Key].Value;
                     s.Value.AddedLevels = 0;
                 }
             }
@@ -125,7 +125,7 @@ namespace Source.Scripts.Systems
                 foreach (var s in _upgradeSessionModel.Skills)
                 {
                     var playerUpgradeStat = SaveExtension.player.UpgradeStats[s.Key];
-                    playerUpgradeStat.Level += s.Value.AddedLevels;
+                    playerUpgradeStat.Value += s.Value.AddedLevels;
                 }
                 SaveExtension.SaveData();
             }

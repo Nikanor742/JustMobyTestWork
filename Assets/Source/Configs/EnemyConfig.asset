@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <EnemyPrefab>k__BackingField: {fileID: 6974276868442136095, guid: 2318bd284b596a748ab204c6f7b23f92, type: 3}
   <BloodPrefab>k__BackingField: {fileID: 167524, guid: fdac75e990da47649b31f10049c400b0, type: 3}
-  <MaxEnemyCount>k__BackingField: 5
+  <MaxEnemyCount>k__BackingField: 50
   <EnemyMoveSpeed>k__BackingField: 5
   <EnemyAngularSpeed>k__BackingField: 120
   <RandomMovePointBound>k__BackingField: 50

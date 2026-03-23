@@ -10,16 +10,19 @@ namespace Source.Scripts.Data
     {
         public SaveProperty<int> SkillPoints = new();
         
-        public Dictionary<EUpgradeType, PlayerStatsData> UpgradeStats = new();
+        public Dictionary<EUpgradeType, SaveProperty<int>> UpgradeStats = new();
 
         public PlayerData()
         {
-            InitFields();
+            InitProperties();
         }
 
-        public void InitFields()
+        public void InitProperties()
         {
             SkillPoints.Init();
+            
+            foreach(var pair in UpgradeStats.Values)
+                pair.Init();
         }
     }
 }

@@ -90,11 +90,11 @@ namespace Source.Scripts.Systems
             
             var runSpeed = _upgradeModificator.GetValue(EUpgradeType.Speed,
                 _playerConfig.RunSpeed,
-                SaveExtension.player.UpgradeStats[EUpgradeType.Speed].Level);
+                SaveExtension.player.UpgradeStats[EUpgradeType.Speed].Value);
             
             var walkSpeed = _upgradeModificator.GetValue(EUpgradeType.Speed,
                 _playerConfig.WalkSpeed,
-                SaveExtension.player.UpgradeStats[EUpgradeType.Speed].Level);
+                SaveExtension.player.UpgradeStats[EUpgradeType.Speed].Value);
             
             var speed = _playerInputSystem.SprintInput && _playerView.CharacterController.isGrounded ? 
                 runSpeed : walkSpeed;

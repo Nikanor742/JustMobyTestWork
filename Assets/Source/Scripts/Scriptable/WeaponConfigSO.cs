@@ -12,6 +12,7 @@ namespace Source.Scripts.Scriptable
         [field: SerializeField] public BulletView BulletView {get; private set;}
         [field: SerializeField] public LayerMask HitMask {get; private set;}
         [field: SerializeField] public float Damage {get; private set;}
+        [field: SerializeField] public float ExplosionRadius {get; private set;}
         [field: SerializeField] public float FireRate {get; private set;}
         [field: SerializeField] public float BulletSpeed {get; private set;}
         

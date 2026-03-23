@@ -38,9 +38,12 @@ namespace Source.Scripts.Factories
             
             IWeapon weapon = weaponConfig.WeaponType switch
             {
-                EWeaponType.Pistol => 
-                    new SimpleWeapon(weaponConfig, weaponView, _bulletFactory,_upgradeModificator, _camera),
-                _ => new SimpleWeapon(weaponConfig, weaponView,_bulletFactory, _upgradeModificator, _camera)
+                EWeaponType.Pistol =>
+                    new SimpleWeapon(weaponConfig, weaponView, _bulletFactory, _upgradeModificator, _camera),
+                EWeaponType.MachineGun =>
+                    new SimpleWeapon(weaponConfig, weaponView, _bulletFactory, _upgradeModificator, _camera),
+                EWeaponType.GrenadeGun =>
+                    new GrenadeGunWeapon(weaponConfig, weaponView, _bulletFactory, _upgradeModificator, _camera)
             };
             
             
