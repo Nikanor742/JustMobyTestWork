@@ -5,6 +5,7 @@ using Source.Scripts.Configs;
 using Source.Scripts.Game.Models;
 using Source.Scripts.Game.Systems;
 using Source.Scripts.Game.Views;
+using Source.Scripts.Localization;
 using Source.Scripts.Save;
 using Source.Scripts.Upgrades.Enums;
 using Source.Scripts.Upgrades.Models;
@@ -19,6 +20,7 @@ namespace Source.Scripts.Upgrades.Systems
         private readonly GameInputSystem _gameInputSystem;
         private readonly UpgradeSessionModel _upgradeSessionModel;
         private readonly GameStateModel _gameStateModel;
+        private readonly LocalizationService _localizationService;
         
         private readonly Dictionary<EUpgradeType, UpgradesConfigSO> _upgradeConfigs = new();
         
@@ -28,11 +30,13 @@ namespace Source.Scripts.Upgrades.Systems
             GameCanvasView gameCanvasView, 
             UpgradeSessionModel upgradeSessionModel, 
             GameStateModel gameStateModel,
-            UpgradesConfigSO[] upgradeConfigs)
+            UpgradesConfigSO[] upgradeConfigs,
+            LocalizationService localizationService)
         {
             _upgradesWindowView = gameCanvasView.UpgradesWindowView;
             _upgradeSessionModel = upgradeSessionModel;
             _gameStateModel = gameStateModel;
+            _localizationService = localizationService;
             
             foreach (var config in upgradeConfigs)
                 _upgradeConfigs.Add(config.UpgradeType, config);
@@ -46,7 +50,8 @@ namespace Source.Scripts.Upgrades.Systems
                     (_upgradesWindowView.UpgradeTemplate, _upgradesWindowView.UpgradeTemplate.transform.parent );
                 
                 skillView.gameObject.SetActive(true);
-                skillView.SetUpgradeName(s.Value.UpgradeName);
+                skillView.LocalizationText.Initialize(_localizationService, s.Value.UpgradeName);
+                skillView.SetUpgradeName(_localizationService.GetText(s.Value.UpgradeName));
                 _upgradesWindowView.Upgrades.Add(s.Key ,skillView);
             }
             

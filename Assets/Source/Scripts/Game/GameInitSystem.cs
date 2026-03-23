@@ -2,8 +2,10 @@ using System;
 using Source.Scripts.Enemies.Systems;
 using Source.Scripts.Extensions;
 using Source.Scripts.Game.Systems;
+using Source.Scripts.Localization;
 using Source.Scripts.Player.Systems;
 using Source.Scripts.Save;
+using Source.Scripts.Tutor.Systems;
 using Source.Scripts.Upgrades.Systems;
 using UnityEngine;
 using VContainer.Unity;
@@ -23,6 +25,9 @@ namespace Source.Scripts.Game
         private readonly UpgradesUISystem _upgradesUISystem;
         private readonly UpgradesSystem _upgradesSystem;
         private readonly PlayerUISystem _playerUISystem;
+        private readonly TutorSystem _tutorSystem;
+        
+        private readonly LocalizationService _localizationService;
         
         private GameActions _gameActions = new();
         
@@ -37,7 +42,9 @@ namespace Source.Scripts.Game
             UpgradesUISystem upgradesUISystem,
             UpgradesSystem upgradesSystem,
             PlayerHealthSystem playerHealthSystem,
-            PlayerUISystem playerUISystem
+            PlayerUISystem playerUISystem,
+            TutorSystem tutorSystem,
+            LocalizationService localizationService
             )
         {
             _playerInputSystem = playerInputSystem;
@@ -51,6 +58,9 @@ namespace Source.Scripts.Game
             _upgradesSystem = upgradesSystem;
             _playerHealthSystem = playerHealthSystem;
             _playerUISystem = playerUISystem;
+            _tutorSystem = tutorSystem;
+            
+            _localizationService = localizationService;
         }
 
         public void Initialize()
@@ -60,6 +70,7 @@ namespace Source.Scripts.Game
             
             _gameActions.Enable();
             
+            _localizationService.Initialize();
             _playerInputSystem.Initialize(_gameActions);
             _gameInputSystem.Initialize(_gameActions);
             _levelSpawnSystem.Initialize();
@@ -72,6 +83,7 @@ namespace Source.Scripts.Game
             _upgradesUISystem.Initialize();
             _playerHealthSystem.Initialize();
             _playerUISystem.Initialize();
+            _tutorSystem.Initialize();
             
             //For drawing player data
             var dataDrawer = new GameObject("DataDrawer");

@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db3bf3c346444a4b8df78157e89b56a8, type: 3}
+  m_Name: LocalizationConfig
+  m_EditorClassIdentifier: 
+  <Langs>k__BackingField:
+  - ru
+  - en
+  <LocalizationData>k__BackingField:
+  - Key: moveTutor
+    Translates:
+    - "\u041F\u0435\u0440\u0435\u0434\u0432\u0438\u0436\u0435\u043D\u0438\u0435 -
+      WASD"
+    - Move - WASD
+  - Key: jumpTutor
+    Translates:
+    - "\u041F\u0440\u044B\u0436\u043E\u043A - Space"
+    - Jump - Space
+  - Key: sprintTutor
+    Translates:
+    - "\u0411\u0435\u0433 - Shift"
+    - Sprint - Shift
+  - Key: pistolTutor
+    Translates:
+    - "\u041F\u0438\u0441\u0442\u043E\u043B\u0435\u0442 - 1"
+    - Pistol - 1
+  - Key: machinegunTutor
+    Translates:
+    - "\u0410\u0432\u0442\u043E\u043C\u0430\u0442 - 2"
+    - Machinegun - 2
+  - Key: grenadegunTutor
+    Translates:
+    - "\u0413\u0440\u0430\u043D\u0430\u0442\u043E\u043C\u0435\u0442 - 3"
+    - Grenadegun - 3
+  - Key: skillPoints
+    Translates:
+    - "\u041E\u0447\u043A\u0438 \u0443\u043C\u0435\u043D\u0438\u0439:"
+    - 'Skill points:'
+  - Key: healthUpgrade
+    Translates:
+    - "\u0417\u0434\u043E\u0440\u043E\u0432\u044C\u0435"
+    - Health
+  - Key: speedUpgrade
+    Translates:
+    - "\u0421\u043A\u043E\u0440\u043E\u0441\u0442\u044C"
+    - Speed
+  - Key: damageUpgrade
+    Translates:
+    - "\u0423\u0440\u043E\u043D"
+    - Damage
+  - Key: apply
+    Translates:
+    - "\u041F\u0440\u0438\u043C\u0435\u043D\u0438\u0442\u044C"
+    - Apply

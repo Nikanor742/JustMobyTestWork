@@ -5,6 +5,8 @@ using Source.Scripts.Configs;
 using Source.Scripts.Game.Models;
 using Source.Scripts.Game.Systems;
 using Source.Scripts.Game.Views;
+using Source.Scripts.Localization;
+using Source.Scripts.Save;
 using Source.Scripts.Upgrades.Enums;
 using Source.Scripts.Upgrades.Models;
 using Source.Scripts.Upgrades.Views;
@@ -19,6 +21,7 @@ namespace Source.Scripts.Upgrades.Systems
         private readonly UpgradeWindowModel _upgradeWindowModel;
         private readonly UpgradeSessionModel _upgradeSessionModel;
         private readonly GameStateModel _gameStateModel;
+        private readonly LocalizationService _localizationService;
         
         private readonly Dictionary<EUpgradeType, UpgradesConfigSO> _upgradeConfigs = new();
         
@@ -30,7 +33,8 @@ namespace Source.Scripts.Upgrades.Systems
             GameStateModel gameStateModel,
             UpgradeSessionModel upgradeSessionModel,
             UpgradeWindowModel upgradeWindowModel,
-            UpgradesConfigSO[] upgradeConfigs)
+            UpgradesConfigSO[] upgradeConfigs,
+            LocalizationService localizationService)
         {
             _gameInputSystem =  gameInputSystem;
             _upgradesWindowView = gameCanvasView.UpgradesWindowView;
@@ -38,6 +42,8 @@ namespace Source.Scripts.Upgrades.Systems
             
             _upgradeSessionModel = upgradeSessionModel;
             _upgradeWindowModel = upgradeWindowModel;
+            
+            _localizationService = localizationService;
             
             foreach (var config in upgradeConfigs)
                 _upgradeConfigs.Add(config.UpgradeType, config);
@@ -51,8 +57,14 @@ namespace Source.Scripts.Upgrades.Systems
             
             _upgradesWindowView.Hide();
             
+            _upgradesWindowView.ApplyText.Initialize(_localizationService);
+            
             _upgradeSessionModel.AvailableSkillPoints
-                .Subscribe(points=> _upgradesWindowView.SetSkillPointsText(points))
+                .Subscribe(points=>
+                {
+                    _upgradesWindowView.SkillPointsText.
+                        SetText($"{_localizationService.GetText(_upgradesWindowView.SkillPointsText.Key)} {points}");
+                })
                 .AddTo(_disposables);
             
             _upgradeSessionModel.OnSuccessUpgradeEvent
@@ -61,6 +73,18 @@ namespace Source.Scripts.Upgrades.Systems
             
             _upgradesWindowView.OnApplyButtonClicked
                 .Subscribe(_ => ChangeWindowState())
+                .AddTo(_disposables);
+            
+            SaveExtension.player.Language.OnChangeEvent
+                .Subscribe(_ =>
+                {
+                    foreach (var upgrade in _upgradesWindowView.Upgrades.Values)
+                        upgrade.LocalizationText.SetText(_localizationService.GetText(upgrade.LocalizationText.Key));
+                    
+                    _upgradesWindowView.SkillPointsText.
+                        SetText($"{_localizationService.GetText(_upgradesWindowView.SkillPointsText.Key)} " +
+                                $"{_upgradeSessionModel.AvailableSkillPoints.Value}");
+                })
                 .AddTo(_disposables);
 
             foreach (var skill in _upgradeSessionModel.Skills)

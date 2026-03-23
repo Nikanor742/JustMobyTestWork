@@ -11,6 +11,9 @@ using Source.Scripts.Upgrades;
 using Source.Scripts.Upgrades.Models;
 using Source.Scripts.Upgrades.Systems;
 using Source.Scripts.Weapons.Factories;
+using Source.Scripts.Localization;
+using Source.Scripts.Tutor;
+using Source.Scripts.Tutor.Systems;
 using Unity.AI.Navigation;
 using UnityEngine;
 using VContainer;
@@ -32,6 +35,7 @@ namespace Source.Scripts.Game
         [SerializeField] private WeaponConfigSO[] _weaponConfigs;
         [SerializeField] private EnemyConfigSO _enemyConfig;
         [SerializeField] private UpgradesConfigSO[] _upgradeConfigs;
+        [SerializeField] private LocalizationConfigSO _localizationConfig;
         
         protected override void Configure(IContainerBuilder builder)
         {
@@ -40,6 +44,7 @@ namespace Source.Scripts.Game
             builder.RegisterInstance(_weaponConfigs);
             builder.RegisterInstance(_enemyConfig);
             builder.RegisterInstance(_upgradeConfigs);
+            builder.RegisterInstance(_localizationConfig);
             
             builder.RegisterComponentInNewPrefab(_levelViewPrefab, Lifetime.Scoped);
             builder.RegisterComponentInNewPrefab(_playerViewPrefab, Lifetime.Scoped);
@@ -70,6 +75,8 @@ namespace Source.Scripts.Game
             builder.Register<UpgradesUISystem>(Lifetime.Scoped);
             builder.Register<UpgradesSystem>(Lifetime.Scoped);
             builder.Register<PlayerUISystem>(Lifetime.Scoped);
+            builder.Register<TutorSystem>(Lifetime.Scoped);
+            builder.Register<LocalizationService>(Lifetime.Scoped);
             
             builder.RegisterEntryPoint<GameInitSystem>();
         }

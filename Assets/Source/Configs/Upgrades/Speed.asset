@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe6b398f62f64373b4062e680ad7e2c2, type: 3}
   m_Name: Speed
   m_EditorClassIdentifier: 
-  <UpgradeName>k__BackingField: Speed
+  <UpgradeName>k__BackingField: speedUpgrade
   <UpgradeType>k__BackingField: 1
   <UpgradePercents>k__BackingField:
   - 5
